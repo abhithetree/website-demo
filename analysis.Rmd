@@ -1,0 +1,48 @@
+---
+title: "Lab 03 - Using Propensity Scores"
+output: github_document
+author: "Abhi Jain"
+Collaborator: "Jihyeon Kwon"
+date: '2022-03-29'
+---
+
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(smd)
+library(gtsummary)
+library(broom)
+library(survey)
+library(rsample)
+library(PSW)
+```
+
+## Exercise 1
+
+```{r}
+cof <- read.csv("coffee_town_df.csv")
+```
+
+The columns in the coffee town dataset are coffee_town (binary variable of whether an individual lives in Coffee Town or not), cups_of_coffee (number of cups of coffee an individual drinks), age (individual's age), job (the difficulty of their job with 3 categories (east, hard, no job)) and smoke (categorical variable that describes their smoking behavior (current smoker, former smoker, never smoked)). 
+
+The dataset has 1100 observations, with 113 in the exposure group. There is no missing data in the dataset.
+
+## Exercise 2
+
+```{r}
+cof %>%
+  tbl_summary(
+    by = coffee_town, 
+    include = c(
+      "age", 
+      "job", 
+      "smoke")) %>%
+  add_overall()
+```
+
+As seen from the unweighted table above, we can see that on average, individuals in Coffee Town are older, more likely to have no job, and more likely to have never smoked. The median age in Coffee Town is 49, whereas the median age in the neighboring town is 39. There is also more variability in age in Coffee Town as the IQR of age in Coffee Town is 38 years, whereas the  IQR in the neighboring town is only 9 years. In neighboring towns, 72% of individuals have an easy job, where as only 47% percent of individuals in Coffee Town have an easy job. However, in Coffee Town, 42% of individuals have no job, whereas only 8.1% of individuals in the neighboring town have no job. Coffee town residents are also slightly more likely to have never smoked, with 95% of residents having never smoked compared to 89% for the neighboring town.
+
+
+The mirrored histogram above shows the distribution of propensity scores between the exposed and unexposed groups. In both groups, we can see that the vast majority of propensity scores are small, near 0.1. This is driven by the fact that about 90% of individuals live in the neighboring town. Additionally, we can see that generally the propensity scores of the residents in the neighboring town are lower than the propensity scores of Coffee Town residents. 
+
+

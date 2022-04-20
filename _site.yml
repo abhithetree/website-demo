@@ -1,0 +1,23 @@
+name: "example-website"
+navbar: 
+  title: "This is an example!"
+  left: 
+    - text: "Home"
+      href: index.html
+    - text: "Analysis"
+      href: analysis.html
+    - text: Readings
+      menu:
+        - text: "Module 1"
+          href: "lab-02-propensity-scores.html"
+  right: 
+    - icon: fa-github fa-lg
+      href: https://github.com/abhithetree
+    - icon: fa-twitter
+      href: "https://twitter.com/abhithetree"
+output:
+  html_document:
+    theme: flatly
+output_dir: "."    
+    
+    

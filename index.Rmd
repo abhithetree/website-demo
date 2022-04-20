@@ -1,0 +1,12 @@
+---
+title: "Example Website"
+---
+
+This is markdown
+  * I can include bullets
+  * another bullet
+## I can include headers
+
+![plot]("img/mice_viz.png")
+
+I can include <i> html</i>
